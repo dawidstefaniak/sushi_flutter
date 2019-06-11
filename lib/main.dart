@@ -81,7 +81,7 @@ class _MyHomePageState extends State<MyHomePage> {
         name: 'Tuna',
         rolls: 4,
         price: 9));
-    _currentSushi = _sushiList[0];
+    _currentSushi = _sushiList[1];
   }
 
   void initLists() {
