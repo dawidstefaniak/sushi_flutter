@@ -87,20 +87,23 @@ class _MyHomePageState extends State<MyHomePage> {
   void initLists() {
     _widgetsList = new List<Widget>();
     _sushiList.forEach((sushi) => {
-          _widgetsList.add(Stack(
-            children: <Widget>[
-              Center(
-                child: Container(
-                  width: 180,
-                  height: 180,
-                  decoration: BoxDecoration(
-                      shape: BoxShape.circle, color: sushi.colour),
+          _widgetsList.add(GestureDetector(
+            onDoubleTap: _addCurrentSushiToListOfWidgets,
+            child: Stack(
+              children: <Widget>[
+                Center(
+                  child: Container(
+                    width: 180,
+                    height: 180,
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle, color: sushi.colour),
+                  ),
                 ),
-              ),
-              Positioned.fill(
-                child: Image.asset('assets/images/${sushi.path}'),
-              )
-            ],
+                Positioned.fill(
+                  child: Image.asset('assets/images/${sushi.path}'),
+                )
+              ],
+            ),
           ))
         });
   }
@@ -279,46 +282,46 @@ class _MyHomePageState extends State<MyHomePage> {
   void _addCurrentSushiToListOfWidgets() {
     _selectedSushiList.add(_currentSushi);
     if (_selectedSushiList.length < 5) {
-      _selectedSushiWidgetsList.insert(
-          // -2 here because there are two widgets on the right hand side of the list. 
-          _selectedSushiWidgetsList.length - 2,
-          CircularContainer(
-            child: Image.asset(
-              'assets/images/${_currentSushi.path}',
-            ),
-            color: Color(0xff202020),
-          ));
+      setState(() {
+        _selectedSushiWidgetsList.insert(
+            // -2 here because there are two widgets on the right hand side of the list.
+            _selectedSushiWidgetsList.length - 2,
+            CircularContainer(
+              child: Image.asset(
+                'assets/images/${_currentSushi.path}',
+              ),
+              color: Color(0xff202020),
+            ));
+      });
     } else if (_selectedSushiList.length == 5) {
-      _selectedSushiWidgetsList.insert(
-          0,
-          circularContainerCounterWidget());
+      setState(() {
+        _selectedSushiWidgetsList.insert(0, circularContainerCounterWidget());
+      });
     } else if (_selectedSushiList.length > 5) {
       setState(() {
         _slidingPanelCounter = _slidingPanelCounter + 1;
       });
       _selectedSushiWidgetsList.removeAt(0);
-      _selectedSushiWidgetsList.insert(
-          0,
-          circularContainerCounterWidget());
+      _selectedSushiWidgetsList.insert(0, circularContainerCounterWidget());
     }
   }
 
   CircularContainer circularContainerCounterWidget() {
     return CircularContainer(
-          color: Color(0xff202020),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text(
-                _slidingPanelCounter.toString(),
-                style: TextStyle(color: Colors.white, fontSize: 32),
-              ),
-              Text(
-                '+',
-                style: TextStyle(color: Colors.white, fontSize: 14),
-              ),
-            ],
+      color: Color(0xff202020),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Text(
+            _slidingPanelCounter.toString(),
+            style: TextStyle(color: Colors.white, fontSize: 32),
           ),
-        );
+          Text(
+            '+',
+            style: TextStyle(color: Colors.white, fontSize: 14),
+          ),
+        ],
+      ),
+    );
   }
 }
