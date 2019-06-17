@@ -88,7 +88,12 @@ class _MyHomePageState extends State<MyHomePage> {
     _widgetsList = new List<Widget>();
     _sushiList.forEach((sushi) => {
           _widgetsList.add(GestureDetector(
-            onDoubleTap: _addCurrentSushiToListOfWidgets,
+            onDoubleTap: () {
+              //This will ensure, that the clicked sushi is the one on the middle,
+              //Not the one on the side
+              if(sushi == _currentSushi)
+              _addCurrentSushiToListOfWidgets();
+            },
             child: Stack(
               children: <Widget>[
                 Center(
