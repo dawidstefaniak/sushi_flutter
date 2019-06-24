@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sliding_up_panel/sliding_up_panel.dart';
+import 'package:sushi/basket_sliding_panel.dart';
 import 'package:sushi/circular_container.dart';
 import 'carousel_slider.dart';
 import 'package:sushi/sushi.dart';
@@ -134,6 +134,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   onPageChanged: (index) => setState(() {
                         _currentSushi = _sushiList[index];
                       }),
+                  
                 ),
                 SizedBox(
                   height: 35,
@@ -259,26 +260,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ],
             ),
           ),
-          SlidingUpPanel(
-            panel: Container(),
-            panelSnapping: true,
-            backdropEnabled: true,
-            renderPanelSheet: false,
-            backdropColor: Colors.grey,
-            collapsed: Container(
-                margin: EdgeInsets.fromLTRB(8, 20, 8, 0),
-                decoration: BoxDecoration(
-                  color: Color(0xff252525),
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(25),
-                    topRight: Radius.circular(25),
-                  ),
-                ),
-                child: Padding(
-                  padding: EdgeInsets.only(left: 15, right: 15),
-                  child: Row(children: _selectedSushiWidgetsList),
-                )),
-          )
+          new BasketSlidingUpPanel(selectedSushiWidgetsList: _selectedSushiWidgetsList, selectedSushiList: _selectedSushiList)
         ],
       ),
     );
@@ -289,26 +271,26 @@ class _MyHomePageState extends State<MyHomePage> {
     if (_selectedSushiList.length < 5) {
       setState(() {
         _selectedSushiWidgetsList.insert(
-            // -2 here because there are two widgets on the right hand side of the list.
+            // -2 here because there are two widgets on the right hand side of the row.
             _selectedSushiWidgetsList.length - 2,
             CircularContainer(
               child: Image.asset(
                 'assets/images/${_currentSushi.path}',
               ),
-              color: Color(0xff202020),
             ));
       });
     } else if (_selectedSushiList.length == 5) {
       setState(() {
         _selectedSushiWidgetsList.insert(0, circularContainerCounterWidget());
       });
-    } else if (_selectedSushiList.length > 5) {
+    } else if (_selectedSushiList.length > 5 && _slidingPanelCounter < 9) {
       setState(() {
         _slidingPanelCounter = _slidingPanelCounter + 1;
       });
       _selectedSushiWidgetsList.removeAt(0);
       _selectedSushiWidgetsList.insert(0, circularContainerCounterWidget());
     }
+    
   }
 
   CircularContainer circularContainerCounterWidget() {
