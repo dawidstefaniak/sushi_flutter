@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
-
 import 'package:sushi/circular_container.dart';
 import 'package:sushi/sushi.dart';
 import 'package:gradient_widgets/gradient_widgets.dart';
@@ -243,7 +242,7 @@ class _BasketSlidingUpPanelState extends State<BasketSlidingUpPanel> {
                                     child: Text(
                               'Buy',
                               style: TextStyle(
-                                  color: Colors.white, fontSize: 24, letterSpacing: 3, fontWeight: FontWeight.w300),
+                                  color: Colors.white, fontSize: 24, letterSpacing: 3, fontWeight: FontWeight.w600),
                             )))
                           ],
                         ),
@@ -253,25 +252,6 @@ class _BasketSlidingUpPanelState extends State<BasketSlidingUpPanel> {
                   )
                 ],
               ),
-
-              /*
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    SizedBox(
-                      width: 15,
-                    ),
-                    Spacer(),
-                    selectedSushiWidgetsList[
-                        selectedSushiWidgetsList.length - 1],
-                    SizedBox(width: 8)
-                  ],
-                ),
-              ),
-              */
             ],
           ),
         ));
