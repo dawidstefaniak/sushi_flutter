@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:sushi/basket_sliding_panel.dart';
 import 'package:sushi/circular_container.dart';
+import 'package:sushi/my_painter.dart';
 import 'package:sushi/sushi.dart';
 
 import 'carousel_slider.dart';
@@ -104,6 +105,13 @@ class _SushiListPageState extends State<SushiListPage> {
     return Scaffold(
       body: Stack(
         children: <Widget>[
+          SizedBox(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            child: CustomPaint(
+              painter: MyPainter(),
+            ),
+          ),
           Container(
             child: Column(
               children: <Widget>[
